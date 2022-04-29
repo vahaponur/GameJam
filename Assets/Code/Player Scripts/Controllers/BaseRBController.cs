@@ -3,8 +3,11 @@ using UnityEngine;
 
 namespace GameJam
 {
+    /// <summary>
+    /// Main rigidbody controller, all scripts that mainly related rb should inherit.
+    /// </summary>
     [RequireComponent(typeof(Rigidbody))]
-    public class BaseRBController : MonoBehaviour
+    public abstract class BaseRBController : MonoBehaviour
     {
         protected Rigidbody rb;
      
