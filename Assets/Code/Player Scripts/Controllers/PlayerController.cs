@@ -3,13 +3,14 @@ using UnityEngine;
 
 namespace GameJam
 {
-    [RequireComponent(typeof(MovementController),typeof( AnimStateController),typeof(InputController))]
+    [RequireComponent(typeof(MovementController),typeof( AnimStater),typeof(InputController))]
+    [RequireComponent(typeof(PlayerStateController))]
     public class PlayerController:MonoBehaviour
     {
         private MovementController _movementController;
-        private AnimStateController _animStateController;
+        private AnimStater _animStater;
         private InputController _inputController;
-
+        private PlayerStateController _playerStateController;
         private void Awake()
         {
             var colliders = GameObject.FindGameObjectsWithTag("PlayerCollider");
@@ -17,11 +18,17 @@ namespace GameJam
             colliders.DisableAll();
         }
 
+        private void Start()
+        {
+            _playerStateController.GetDependencies(_movementController,_inputController);
+        }
+
         void GetInternalDependencies()
         {
             _movementController = GetComponent<MovementController>();
-            _animStateController = GetComponent<AnimStateController>();
+            _animStater = GetComponent<AnimStater>();
             _inputController = GetComponent<InputController>();
+            _playerStateController = GetComponent<PlayerStateController>();
         }
 
         private void FixedUpdate()
@@ -32,7 +39,8 @@ namespace GameJam
 
         private void Update()
         {
-            _animStateController.UpdateAnimator();
+            _animStater.UpdateAnimator();
+            _playerStateController.SetStateAccordingRB();
         }
     }
 }

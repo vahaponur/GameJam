@@ -5,12 +5,19 @@ using UnityEngine;
 
 namespace GameJam
 {
+    
  
-    public class AnimStateController : MonoBehaviour
+    public class AnimStater : MonoBehaviour
+    
     {
+        enum AnimState
+        {
+            Idle,
+            Walk
+        }
         #region Private Fields
 
-        
+        private AnimState _state;
        [SerializeField]private Animator _animator;
         
 
@@ -34,27 +41,12 @@ namespace GameJam
 
         public void UpdateAnimator()
         {
-            SetIdle();
-            SetWalk();
-            
-        }
-        void SetWalk()
-        {
-            if (PlayerDataSingleton.Instance.PlayerState == PLAYERSTATE.WALK)
-            {
-                _animator.SetTrigger("Walking");
-                
-            }
-        }
+            _animator.SetInteger("state",(int)_state);
+            _state = (AnimState)((int)PlayerDataSingleton.Instance.PlayerState);
 
-        void SetIdle()
-        {
-            if (PlayerDataSingleton.Instance.PlayerState == PLAYERSTATE.IDLE)
-            {
-                _animator.SetTrigger("Idle");
-            }
         }
-
+  
+        
         #endregion
 
 

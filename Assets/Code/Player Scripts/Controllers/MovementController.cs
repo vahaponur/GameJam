@@ -21,16 +21,24 @@ namespace GameJam
         
         #endregion
 
+        #region Public Properties
+
+        public Rigidbody Rb => rb;
+        
+
+        #endregion
+
         #region Public Methods
         public void UpdateMovement(InputController inputController)
         {
-            SetStateAccordingRB();
+            
             SetChangeConstraints();
             AddClampedForce(inputController);
             AddRotationTorque(inputController);
             SetDefaultConstraints();
             
         }
+        
 
         #endregion
 
@@ -83,17 +91,7 @@ namespace GameJam
         }
         
 
-        void SetStateAccordingRB()
-        {
-            if ( rb.velocity.magnitude > 0.1)
-            {
-                PlayerDataSingleton.Instance.PlayerState = PLAYERSTATE.WALK;
-                return;                
-            }
-
-            PlayerDataSingleton.Instance.PlayerState = PLAYERSTATE.IDLE;
-
-        }
+     
         void SetDefaultConstraints()
         {
             rb.constraints = RigidbodyConstraints.FreezeRotation;
