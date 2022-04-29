@@ -17,6 +17,7 @@ namespace GameJam
             { 
                 Instance = this; 
             } 
+            DontDestroyOnLoad(gameObject);
         }
     }
 }
