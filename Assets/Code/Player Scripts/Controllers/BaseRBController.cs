@@ -19,7 +19,7 @@ namespace GameJam
             weightInNewton = 500;
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
       
             rb = GetComponent<Rigidbody>();

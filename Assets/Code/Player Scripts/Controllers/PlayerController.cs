@@ -31,16 +31,13 @@ namespace GameJam
             _playerStateController = GetComponent<PlayerStateController>();
         }
 
-        private void FixedUpdate()
-        {
-            _movementController.UpdateMovement(_inputController);
-            
-        }
+      
 
         private void Update()
         {
             _animStater.UpdateAnimator();
             _playerStateController.SetStateAccordingRB();
+            _movementController.UpdateTransformMovement(_inputController);
         }
     }
 }

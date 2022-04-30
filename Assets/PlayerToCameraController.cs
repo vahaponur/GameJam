@@ -31,11 +31,10 @@ namespace GameJam
    
         void Update()
         {
-            if (PlayerDataSingleton.Instance.PlayerState != PLAYERSTATE.IDLE)
-            {
+            
                 transform.position = player.transform.position;
                 transform.rotation = Quaternion.Lerp(transform.rotation, player.transform.rotation,3*Time.deltaTime);
-            }
+            
         }
         #endregion
     
