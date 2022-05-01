@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Cinemachine;
 using UnityEngine;
 
@@ -8,36 +9,40 @@ namespace GameJam
     {
         #region Serialized Fields
 
-        [Header("Movement Properties")] [SerializeField, Range(300, 700), Tooltip("Force rate to add to rb on input")]
-        private float speed = 500f;
-
-        [SerializeField, Range(1, 10), Tooltip("Torque rate to add to rb on input")]
-        private float torqueSpeed = 2f;
-
-        [SerializeField, Range(1, 25), Tooltip("Maximum rigidbody velocity magnitude")]
-        private float maxVelocity = 10f;
-
-        [SerializeField, Range(1, 10), Tooltip("Maximum angular velocity magnitude")]
-        private float maxTorque = 3f;
+        [SerializeField,Range(1,5)] float jumpHeight = 1.0f;
 
         #endregion
 
         #region Private Fields
 
-        private float currentVel;
-        private float currentTorque;
+     
         private Camera cam;
         private CharacterController controller;
+        private Vector3 playerVelocity;
+        private bool groundedPlayer;
+        private float gravityValue = -9.81f;
+        private GameObject groundChecker;
+        private LayerMask mask;
+
+        #region Obsolute
+        private float currentVel;
+        private float currentTorque;
+        public Rigidbody Rb => rb;
+
+      
+        #endregion
         #endregion
 
         #region Public Properties
 
-        public Rigidbody Rb => rb;
+        
 
         #endregion
 
         protected void Start()
         {
+            groundChecker = transform.Find("GroundChecker1").gameObject;
+
             cam = FindObjectOfType<Camera>();
             controller = GetComponent<CharacterController>();
         }
@@ -59,10 +64,7 @@ namespace GameJam
         protected override void Reset()
         {
             base.Reset();
-            speed = 500f;
-            maxVelocity = 10f;
-            torqueSpeed = 2f;
-            maxTorque = 3f;
+    
         }
 
         #endregion
@@ -77,20 +79,30 @@ namespace GameJam
            
             var totalInput = new Vector3(inputController.HorizontalInput, 0, inputController.VerticalInput);
             var magnitude = Mathf.Clamp(totalInput.magnitude, -1, 1); ;
-            
+            groundedPlayer = isGrounded();
+            if (groundedPlayer && playerVelocity.y < 0)
+            {
+                playerVelocity.y = 0f;
+            }
 
             if (magnitude != 0)
             {
-                PlayerDataSingleton.Instance.PlayerState = PLAYERSTATE.WALK;
+            
                 //Appliying gravity on input may need to change
-                controller.Move(-transform.up * 9.81f * Time.deltaTime);
+                
                 
                 controller.Move(Mathf.Abs(magnitude) * transform.forward * 3 * Time.deltaTime);
             }
-            else
+        
+            // Changes the height position of the player..
+            if (Input.GetButtonDown("Jump") && groundedPlayer)
             {
-                PlayerDataSingleton.Instance.PlayerState = PLAYERSTATE.IDLE;
+                playerVelocity.y += Mathf.Sqrt(jumpHeight * -gravityValue);
             }
+
+            playerVelocity.y += gravityValue*1.5f * Time.deltaTime;
+            controller.Move(playerVelocity * Time.deltaTime);
+        
         }
         /// <summary>
         /// Rotates to cam right or forward according to input (horizontal- right turn,vertical forward turn)
@@ -114,68 +126,21 @@ namespace GameJam
                 transform.rotation = Quaternion.Slerp(transform.rotation, lerpVector2, 5 * Time.deltaTime);
             }
         }
-
-
-        #region Obsolute
-        public void UpdaterRbMovement(InputController inputController)
-        {
-            //SetChangeConstraints();
-            //AddClampedForce(inputController);
-            //AddRotationTorque(inputController);
-            //SetDefaultConstraints();
-        }
         /// <summary>
-        /// Sets the position change of player, clamping unnecessary acceleration
+        /// Ture if player gorunded
         /// </summary>
-        /// <param name="inputController"></param>
-        [Obsolete]
-        void AddClampedForce(InputController inputController)
+        /// <returns></returns>
+        bool isGrounded()
         {
-            currentVel = rb.velocity.magnitude;
-            if (currentVel < maxVelocity)
-            {
-                float clamper = (maxVelocity - currentVel) / maxVelocity;
-                rb.AddForce(transform.forward * Mathf.Abs(inputController.VerticalInput) * speed * clamper);
 
-                //might verbose: increasing drag while velocity reaches maxVelocity
-                rb.drag = clamper;
-            }
+             mask =~ LayerMask.GetMask("Player");
+            var cols =Physics.OverlapSphere(groundChecker.transform.position, 0.2f,mask);
+            return cols.Length>0 ;
         }
 
+       
 
-        [Obsolete]
-        void SetDefaultConstraints()
-        {
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
-        }
-
-        [Obsolete]
-        void SetChangeConstraints()
-        {
-            rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-        }
-
-        /// <summary>
-        /// Sets the rotation of player, clamping unnecessary acceleration
-        /// </summary>
-        /// <param name="inputController">Input Controller</param>
-        [Obsolete]
-        void AddRotationTorque(InputController inputController)
-        {
-            float currentTorque = rb.angularVelocity.magnitude;
-            if (currentTorque < maxTorque)
-            {
-                float clamper = (maxTorque - currentTorque) / maxTorque;
-                rb.AddTorque(inputController.HorizontalInput * transform.up * torqueSpeed * clamper,
-                    ForceMode.VelocityChange);
-
-                //might verbose: just increasing angular drag while torque speed reaches the maxRot speed
-                rb.angularDrag = clamper;
-            }
-        }
-
-        #endregion
-
+    
         #endregion
     }
 }

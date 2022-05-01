@@ -17,7 +17,7 @@ namespace GameJam
         }
         #region Private Fields
 
-        private AnimState _state;
+        private int _state;
        [SerializeField]private Animator _animator;
         
 
@@ -41,8 +41,9 @@ namespace GameJam
 
         public void UpdateAnimator()
         {
-            _animator.SetInteger("state",(int)_state);
-            _state = (AnimState)((int)PlayerDataSingleton.Instance.PlayerState);
+            
+            _state = (int)PlayerDataSingleton.Instance.PlayerState;
+            _animator.SetInteger("state",_state);
 
         }
   

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 476292742}
   m_Layer: 0
-  m_Name: StepFeet
+  m_Name: GroundChecker1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476292741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.019, z: 0}
+  m_LocalPosition: {x: 0, y: 0.028, z: 0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3758742349738377751}
@@ -1656,8 +1656,8 @@ GameObject:
   - component: {fileID: 3758742349738377752}
   - component: {fileID: 3758742349738377753}
   - component: {fileID: 2992577964328380770}
-  - component: {fileID: 574963654}
   - component: {fileID: 328693651308277653}
+  - component: {fileID: 624418166}
   m_Layer: 0
   m_Name: PlayerMain
   m_TagString: Player
@@ -1693,10 +1693,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0.1
   m_AngularDrag: 0.1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &3758742349738377754
 MonoBehaviour:
@@ -1711,9 +1711,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weightInNewton: 500
-  speed: 506
+  speed: 468
   torqueSpeed: 5.68
-  maxVelocity: 15.3
+  maxVelocity: 14
   maxTorque: 7.86
 --- !u!114 &3758742349738377755
 MonoBehaviour:
@@ -1761,23 +1761,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 3758742349738377758}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.3215158
-  m_Height: 1.1687924
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.5443962, z: 0}
---- !u!114 &574963654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3758742349738377758}
   m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83e54584205a1d04c9afb456fe95b96b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Radius: 0.17360276
+  m_Height: 0.9735471
+  m_Direction: 1
+  m_Center: {x: -0.005916521, y: 0.61237735, z: 0.002958253}
 --- !u!114 &328693651308277653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1790,6 +1778,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2037769e14494a23bd0decb753698f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!143 &624418166
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3758742349738377758}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.2
+  m_Radius: 0.25
+  m_SlopeLimit: 45
+  m_StepOffset: 0.21
+  m_SkinWidth: 0.15
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &3803327640444438367
 GameObject:
   m_ObjectHideFlags: 0

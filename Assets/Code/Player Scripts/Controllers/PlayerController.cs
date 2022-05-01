@@ -20,7 +20,7 @@ namespace GameJam
 
         private void Start()
         {
-            _playerStateController.GetDependencies(_movementController,_inputController);
+            
         }
 
         void GetInternalDependencies()
@@ -36,7 +36,7 @@ namespace GameJam
         private void Update()
         {
             _animStater.UpdateAnimator();
-            _playerStateController.SetStateAccordingRB();
+            _playerStateController.UpdatePlayerState(_inputController);
             _movementController.UpdateTransformMovement(_inputController);
         }
     }

@@ -30,6 +30,7 @@ namespace GameJam
         void Update()
         {
             SetXY();
+            SetFightInput();
         }
         #endregion
         
@@ -41,6 +42,18 @@ namespace GameJam
         {
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");
+        }
+
+        void SetFightInput()
+        {
+            attackInput = Input.GetAxis("Fire1");
+        }
+
+        public bool OnlyMoving()
+        {
+            bool b1 = horizontalInput != 0 || verticalInput != 0;
+            bool b2 = attackInput == 0;
+            return b1 & b2;
         }
         #endregion
     }
