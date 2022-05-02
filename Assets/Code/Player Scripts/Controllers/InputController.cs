@@ -11,7 +11,7 @@ namespace GameJam
     public class InputController : MonoBehaviour
     {
         #region Axes
-        private float turn, walk, attack,  dodge, mouseX, mouseY,run;
+        private float turn, walk, attack,  dodge, mouseX, mouseY,run,jumpAxis;
         private bool jump;
 
         public float Turn => turn;
@@ -29,6 +29,8 @@ namespace GameJam
         public float MouseY => mouseY;
 
         public float Run => run;
+
+        public float JumpAxis => jumpAxis;
 
         #endregion
         
@@ -48,6 +50,7 @@ namespace GameJam
             mouseX = Input.GetAxis(head + "MouseX");
             mouseY = Input.GetAxis(head + "MouseY");
             run = Input.GetAxis(head + "Run");
+            jumpAxis = Input.GetAxis(head + "Jump");
             Debug.Log(head);
 
         }

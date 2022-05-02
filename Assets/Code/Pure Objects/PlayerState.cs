@@ -7,6 +7,7 @@
     {
         IDLE,
         WALK,
+        RUN,
         TURN,
         JUMP,
         DODGE,

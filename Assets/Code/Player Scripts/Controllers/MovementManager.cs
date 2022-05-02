@@ -11,7 +11,7 @@ namespace GameJam
         [SerializeField]private GameObject groundChecker;
         [Header("Movement Properties")]
         [SerializeField,Range(1,5)]private float jumpHeight;
-        private Animator _animator;
+ 
         private InputController inputController;
         private CharacterController _controller;
         
@@ -19,12 +19,17 @@ namespace GameJam
         private Vector3 playerVelocity;
         
         private float gravityValue = Physics.gravity.magnitude;
-        private bool groundedPlayer;
+        private bool playerIsGrounded;
+        private float inputVel;
+
+        public float InputVel => inputVel;
+
+        public bool PlayerIsGrounded => playerIsGrounded;
+
 
         private void Awake()
         {
             _controller = GetComponent<CharacterController>();
-            _animator = GetComponent<Animator>();
             inputController = GetComponent<InputController>();
         }
 
@@ -43,28 +48,26 @@ namespace GameJam
 
         void Walk()
         {
-            float inputVel = GetXZVelocity();
-            _animator.SetFloat("Speed",inputVel,0.1f,Time.deltaTime);
-            
+             inputVel = GetXZVelocity();
 
         }
 
         void Jump()
         {
-            var totalInput = GetMovementVector();
-            var velOnJump = Mathf.Clamp01(totalInput.magnitude);
+
+            var velOnJump = GetXZVelocity();
           
-            _animator.applyRootMotion = groundedPlayer = isGrounded();
-            Debug.Log(groundedPlayer);
-            ArrangeJumpAnim();
-            if (groundedPlayer && playerVelocity.y < 0)
+             playerIsGrounded = IsGrounded();
+
+            if (playerIsGrounded && playerVelocity.y < 0)
             {
                 playerVelocity.y = 0f;
             }
-            _animator.SetFloat("InputMag",velOnJump);
-            if (velOnJump != 0 && !groundedPlayer)
+           
+            if (velOnJump != 0 && !playerIsGrounded)
                 _controller.Move(Mathf.Abs(velOnJump) * transform.forward * 2 * Time.deltaTime);
-            if (inputController.Jump && groundedPlayer)
+            
+            if (inputController.Jump && playerIsGrounded)
                 playerVelocity.y += Mathf.Sqrt(jumpHeight* gravityValue);
            
             playerVelocity.y += -gravityValue*1.5f * Time.deltaTime;
@@ -72,24 +75,7 @@ namespace GameJam
 
         }
 
-        void ArrangeJumpAnim()
-        {
-        
-
-            if (Input.GetAxis("KeyboardJump")>0 || Input.GetAxis("XboxJump")>0)
-            {
-                _animator.SetBool("isJumping",true);
-
-            }
-            else if (groundedPlayer)
-            {
-                _animator.SetBool("isJumping",false);
-                
-            }
-
-            
-            
-        }
+     
 
         float GetXZVelocity()
         {
@@ -100,7 +86,7 @@ namespace GameJam
 
         Vector3 GetMovementVector()=> new Vector3(inputController.Turn, 0, inputController.Walk);
         
-        bool isGrounded()
+        bool IsGrounded()
         {
 
             Collider[] colsArr = new Collider[1];
