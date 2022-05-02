@@ -13,6 +13,7 @@ namespace GameJam
         #region Private Fields
 
         private float horizontalInput, verticalInput, attackInput;
+        private bool sprint;
 
         #endregion
 
@@ -22,6 +23,7 @@ namespace GameJam
         public float VerticalInput => verticalInput;
 
         public float AttackInput => attackInput;
+        public bool Sprint => sprint;
 
         #endregion
 
@@ -47,13 +49,15 @@ namespace GameJam
         void SetFightInput()
         {
             attackInput = Input.GetAxis("Fire1");
+            sprint = Input.GetKeyDown(KeyCode.LeftShift);
         }
 
         public bool OnlyMoving()
         {
             bool b1 = horizontalInput != 0 || verticalInput != 0;
             bool b2 = attackInput == 0;
-            return b1 & b2;
+            bool b3 = !sprint;
+            return b1 & b2 & b3;
         }
         #endregion
     }

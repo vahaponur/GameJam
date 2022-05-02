@@ -10,7 +10,7 @@ namespace GameJam
         #region Serialized Fields
 
         [SerializeField,Range(1,5)] float jumpHeight = 1.0f;
-
+        [SerializeField] private Animator skinAnim;
         #endregion
 
         #region Private Fields
@@ -53,8 +53,10 @@ namespace GameJam
 
         public void UpdateTransformMovement(InputController inputController)
         {
+            AttackStateHandler();
             MoveWithCC(inputController);
             RotateToCam(inputController);
+            Sprint();
         }
 
         #endregion
@@ -127,7 +129,7 @@ namespace GameJam
             }
         }
         /// <summary>
-        /// Ture if player gorunded
+        /// Ture if player grounded
         /// </summary>
         /// <returns></returns>
         bool isGrounded()
@@ -138,8 +140,39 @@ namespace GameJam
             return cols.Length>0 ;
         }
 
-       
+        void Sprint()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                StartCoroutine("SprintOverTime");
+            }
+        }
 
+        IEnumerator SprintOverTime()
+        {
+     
+            float time = 0;
+            while (time < 0.5f) 
+            {
+                controller.Move(transform.forward*5* Time.deltaTime );
+            
+                time += Time.deltaTime;
+                yield return null;
+            }
+            
+        }
+       
+        void AttackStateHandler(){
+            if (PlayerDataSingleton.Instance.PlayerState == PLAYERSTATE.ATTACK)
+            {
+           
+            
+            }
+
+         
+
+
+        }
     
         #endregion
     }

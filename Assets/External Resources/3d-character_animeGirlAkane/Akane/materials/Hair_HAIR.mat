@@ -9,13 +9,13 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Hair_HAIR
   m_Shader: {fileID: 4800000, guid: f44128d0973799146a46f8a10d942021, type: 3}
-  m_ShaderKeywords: _ALPHABLEND_ON
+  m_ShaderKeywords: MTOON_OUTLINE_COLOR_FIXED MTOON_OUTLINE_WIDTH_WORLD
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap:
-    RenderType: Transparent
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -94,14 +94,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaToMask: 0
-    - _BlendMode: 2
+    - _BlendMode: 0
     - _BumpScale: 1
     - _Cull: 2
     - _CullMode: 0
     - _Cutoff: 0.52
     - _DebugMode: 0
     - _DetailNormalMapScale: 1
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
@@ -115,29 +115,29 @@ Material:
     - _OutlineCullMode: 1
     - _OutlineLightingMix: 1
     - _OutlineScaledMaxDistance: 1
-    - _OutlineWidth: 0.5
-    - _OutlineWidthMode: 0
+    - _OutlineWidth: 1
+    - _OutlineWidthMode: 1
     - _Parallax: 0.02
     - _ReceiveShadowRate: 1
-    - _RimFresnelPower: 1
-    - _RimLift: 0
-    - _RimLightingMix: 0
+    - _RimFresnelPower: 7
+    - _RimLift: 0.21
+    - _RimLightingMix: 0.08
     - _ShadeShift: 0
-    - _ShadeToony: 0.46
+    - _ShadeToony: 0
     - _ShadingGradeRate: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _UVSec: 0
     - _UvAnimRotation: 0
     - _UvAnimScrollX: 0
     - _UvAnimScrollY: 0
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.06407974, g: 0.83986735, b: 0.9056604, a: 0.95686275}
+    - _Color: {r: 1, g: 0.2028302, b: 0.45817366, a: 0.95686275}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MovementDirection: {r: 0, g: -1, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RimColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShadeColor: {r: 1, g: 0.02352941, b: 0.65424365, a: 0.80784315}
+    - _RimColor: {r: 0.49656394, g: 0.08962262, b: 1, a: 1}
+    - _ShadeColor: {r: 0, g: 1, b: 0.31493068, a: 1}
   m_BuildTextureStacks: []
