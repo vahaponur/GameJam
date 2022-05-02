@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,57 +10,49 @@ namespace GameJam
     /// </summary>
     public class InputController : MonoBehaviour
     {
-        
-        #region Private Fields
+        #region Axes
+        private float turn, walk, attack,  dodge, mouseX, mouseY,run;
+        private bool jump;
 
-        private float horizontalInput, verticalInput, attackInput;
-        private bool sprint;
+        public float Turn => turn;
 
-        #endregion
+        public float Walk => walk;
 
-        #region Public Properties
-        public float HorizontalInput => horizontalInput;
+        public float Attack => attack;
 
-        public float VerticalInput => verticalInput;
+        public bool Jump => jump ;
 
-        public float AttackInput => attackInput;
-        public bool Sprint => sprint;
+        public float Dodge => dodge;
 
-        #endregion
+        public float MouseX => mouseX;
 
-        #region MonoBehaveMethods
-    
-        void Update()
-        {
-            SetXY();
-            SetFightInput();
-        }
+        public float MouseY => mouseY;
+
+        public float Run => run;
+
         #endregion
         
-        #region PrivateMethods
-        /// <summary>
-        /// Sets vertical and horizontal input
-        /// </summary>
-        void SetXY()
+        private void Update()
         {
-            horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = Input.GetAxis("Vertical");
+            SetInputAxes();
         }
 
-        void SetFightInput()
+        void SetInputAxes()
         {
-            attackInput = Input.GetAxis("Fire1");
-            sprint = Input.GetKeyDown(KeyCode.LeftShift);
+            string head = DeviceManager.GamePadActive() ? "Xbox" : "Keyboard";
+            turn = Input.GetAxis(head+"Turn");
+            walk = Input.GetAxis(head+"Walk");
+            attack = Input.GetAxis(head+"Attack");
+            jump = Input.GetButtonDown(head + "Jump");
+            dodge = Input.GetAxis(head + "Dodge");
+            mouseX = Input.GetAxis(head + "MouseX");
+            mouseY = Input.GetAxis(head + "MouseY");
+            run = Input.GetAxis(head + "Run");
+            Debug.Log(head);
+
         }
 
-        public bool OnlyMoving()
-        {
-            bool b1 = horizontalInput != 0 || verticalInput != 0;
-            bool b2 = attackInput == 0;
-            bool b3 = !sprint;
-            return b1 & b2 & b3;
-        }
-        #endregion
+
     }
 }
 

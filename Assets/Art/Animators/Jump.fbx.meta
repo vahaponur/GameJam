@@ -41,7 +41,7 @@ ModelImporter:
       name: JumpIdle
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 0
+      firstFrame: 5.2
       lastFrame: 54
       wrapMode: 0
       orientationOffsetY: 0

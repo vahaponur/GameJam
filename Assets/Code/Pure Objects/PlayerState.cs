@@ -8,7 +8,6 @@
         IDLE,
         WALK,
         TURN,
-        SPRINT,
         JUMP,
         DODGE,
         ATTACK,

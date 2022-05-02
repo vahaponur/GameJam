@@ -45,21 +45,7 @@ public class Dissolver : MonoBehaviour
     void SprintDeneme()
     {
 
-        if (PlayerDataSingleton.Instance.PlayerState == PLAYERSTATE.SPRINT)
-        {
-            foreach (var mat in dissolveMats)
-            {
-                mat.SetFloat("_Cutoff",0.7f);
-            }
-        }
-        else
-        {
-            foreach (var mat in dissolveMats)
-            {
-                mat.SetFloat("_Cutoff",0f);
-            }
-        }
-
+  
      
     }
     

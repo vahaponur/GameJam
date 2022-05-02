@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 3b17e6df435138c458d6b89991bb0d6d
+guid: 60bc41b45635b884f81265338a66838d
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: SlashLoonng
+    second: SwordOneHit
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -38,11 +38,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: SlashLoonng
+      name: SwordOneHit
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 211
+      lastFrame: 76
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -52,7 +52,7 @@ ModelImporter:
       loopTime: 1
       loopBlend: 1
       loopBlendOrientation: 1
-      loopBlendPositionY: 1
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
