@@ -11,11 +11,13 @@ namespace GameJam
     {
         private Animator animator;
         private MovementManager movementManager;
+        private InputController inputC;
     
         private void Start()
         {
             animator = GetComponent<Animator>();
             movementManager = GetComponent<MovementManager>();
+            inputC = GetComponent<InputController>();
         }
     
         private void Update()
@@ -26,6 +28,7 @@ namespace GameJam
             bool walk = pState == PLAYERSTATE.WALK;
             bool run = pState == PLAYERSTATE.RUN;
             bool jump = pState == PLAYERSTATE.JUMP;
+            bool attack = pState == PLAYERSTATE.ATTACK;
             if (idle || walk || run )
             {
                 SetWalkSpeed(movementManager.InputVel);
@@ -36,6 +39,12 @@ namespace GameJam
             {
                 SetJumpVelocity(movementManager.InputVel);
             }
+
+            if (attack)
+            {
+                SetAttackSens(inputC.AttackSens);
+            }
+            SetAttackAnim(inputC.Attack>0);
             
         }
     
@@ -57,6 +66,16 @@ namespace GameJam
         void SetAnimRootMotion(bool isGrounded)
         {
             animator.applyRootMotion = isGrounded;
+        }
+
+        void SetAttackSens(float sens)
+        {
+            animator.SetFloat("AttackInput",sens);
+        }
+
+        void SetAttackAnim(bool val)
+        {
+            animator.SetBool("isAttacking",val);
         }
     }
 

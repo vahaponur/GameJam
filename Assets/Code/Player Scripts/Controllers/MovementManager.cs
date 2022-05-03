@@ -42,8 +42,12 @@ namespace GameJam
         private void Update()
         {
             RotateToCam();
-            Walk();
-            Jump();
+            if (PlayerDataSingleton.Instance.PlayerState != PLAYERSTATE.ATTACK)
+            {
+                Walk();
+                Jump();
+            }
+    
         }
 
         void Walk()

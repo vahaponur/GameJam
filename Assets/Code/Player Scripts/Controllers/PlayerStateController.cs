@@ -27,10 +27,13 @@ namespace GameJam
 
             #endregion
 
-            if (isJumpInput>0 && !grounded)
+            if (inputController.Attack > 0)
+                PlayerDataSingleton.Instance.PlayerState = PLAYERSTATE.ATTACK;
+            
+            else if (isJumpInput>0 && !grounded)
                 PlayerDataSingleton.Instance.PlayerState = PLAYERSTATE.JUMP;
             
-            if (walkInput > 0 && walkInput<1.8f)
+            else if (walkInput > 0 && walkInput<1.8f)
                 PlayerDataSingleton.Instance.PlayerState = PLAYERSTATE.WALK;
             
             

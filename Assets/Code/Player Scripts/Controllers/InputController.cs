@@ -10,9 +10,11 @@ namespace GameJam
     /// </summary>
     public class InputController : MonoBehaviour
     {
+        private float dTime;
         #region Axes
         private float turn, walk, attack,  dodge, mouseX, mouseY,run,jumpAxis;
         private bool jump;
+        private float attackSens;
 
         public float Turn => turn;
 
@@ -32,11 +34,14 @@ namespace GameJam
 
         public float JumpAxis => jumpAxis;
 
+        public float AttackSens => attackSens;
+
         #endregion
         
         private void Update()
         {
             SetInputAxes();
+            SetAttackSens();
         }
 
         void SetInputAxes()
@@ -55,7 +60,19 @@ namespace GameJam
 
         }
 
+        void SetAttackSens()
+        {
+            if (attack > 0)
+            {
+                dTime += Time.deltaTime;
+                attackSens = dTime;
+                return;
+            }
 
+            dTime = 0.0f;
+
+
+        }
     }
 }
 
