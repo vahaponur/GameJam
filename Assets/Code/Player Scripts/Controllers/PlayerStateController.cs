@@ -27,7 +27,7 @@ namespace GameJam
 
             #endregion
 
-            if (inputController.Attack > 0)
+            if (inputController.ONAttack)
                 PlayerDataSingleton.Instance.PlayerState = PLAYERSTATE.ATTACK;
             
             else if (isJumpInput>0 && !grounded)

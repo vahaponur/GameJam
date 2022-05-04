@@ -12,15 +12,17 @@ namespace GameJam
     {
         private float dTime;
         #region Axes
-        private float turn, walk, attack,  dodge, mouseX, mouseY,run,jumpAxis;
-        private bool jump;
+        private float turn, walk,   dodge, mouseX, mouseY,run,jumpAxis;
+        private bool jump,attack;
         private float attackSens;
+        private bool onAttack;
+        private int numberOfClick;
 
         public float Turn => turn;
 
         public float Walk => walk;
 
-        public float Attack => attack;
+        public bool Attack => attack;
 
         public bool Jump => jump ;
 
@@ -36,12 +38,14 @@ namespace GameJam
 
         public float AttackSens => attackSens;
 
+        public bool ONAttack => onAttack;
+
         #endregion
         
         private void Update()
         {
             SetInputAxes();
-            SetAttackSens();
+
         }
 
         void SetInputAxes()
@@ -49,7 +53,7 @@ namespace GameJam
             string head = DeviceManager.GamePadActive() ? "Xbox" : "Keyboard";
             turn = Input.GetAxis(head+"Turn");
             walk = Input.GetAxis(head+"Walk");
-            attack = Input.GetAxis(head+"Attack");
+            attack = Input.GetButtonDown(head+"Attack");
             jump = Input.GetButtonDown(head + "Jump");
             dodge = Input.GetAxis(head + "Dodge");
             mouseX = Input.GetAxis(head + "MouseX");
@@ -60,19 +64,11 @@ namespace GameJam
 
         }
 
-        void SetAttackSens()
+        void SetAttack()
         {
-            if (attack > 0)
-            {
-                dTime += Time.deltaTime;
-                attackSens = dTime;
-                return;
-            }
-
-            dTime = 0.0f;
-
-
+            
         }
+        
     }
 }
 

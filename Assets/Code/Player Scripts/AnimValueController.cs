@@ -12,7 +12,8 @@ namespace GameJam
         private Animator animator;
         private MovementManager movementManager;
         private InputController inputC;
-    
+        private long currentAttackClicks;
+        private float animDeltaTime;
         private void Start()
         {
             animator = GetComponent<Animator>();
@@ -40,11 +41,47 @@ namespace GameJam
                 SetJumpVelocity(movementManager.InputVel);
             }
 
-            if (attack)
+            SetAttackStates();
+            
+        }
+        //TODO..
+        void SetAttackStates()
+        {
+            var firstAttack = animator.GetBool("isAttacking");
+            var secondAttack = animator.GetBool("isSecondAttacking");
+            if (inputC.Attack)
             {
-                SetAttackSens(inputC.AttackSens);
+                currentAttackClicks++;
+                
             }
-            SetAttackAnim(inputC.Attack>0);
+
+            if (firstAttack || secondAttack)
+            {
+                animDeltaTime += Time.deltaTime;
+            }
+
+            if (currentAttackClicks % 2 == 1 && inputC.Attack && animDeltaTime <0.97)
+            {
+                animator.SetBool("isAttacking",true);
+                animator.SetBool("isSecondAttacking",false);
+                
+            }
+            if (currentAttackClicks % 2 ==0 && inputC.Attack && animDeltaTime > 0.97)
+            {
+                animator.SetBool("isAttacking",false);
+                animator.SetBool("isSecondAttacking",true);
+            }
+
+            
+
+            if (animDeltaTime>2.367f)
+            {
+                animator.SetBool("isAttacking",false);
+                animator.SetBool("isSecondAttacking",false);
+                animDeltaTime = 0f;
+            }
+
+           
             
         }
     
@@ -68,11 +105,7 @@ namespace GameJam
             animator.applyRootMotion = isGrounded;
         }
 
-        void SetAttackSens(float sens)
-        {
-            animator.SetFloat("AttackInput",sens);
-        }
-
+        
         void SetAttackAnim(bool val)
         {
             animator.SetBool("isAttacking",val);
