@@ -6,6 +6,12 @@ using UnityEngine;
 
 namespace GameJam
 {
+    public enum ATTACKANIMTYPE
+    {
+        FIRST,
+        SECOND
+        
+    }
     [RequireComponent(typeof(Animator),typeof(MovementManager))]
     public class AnimValueController : MonoBehaviour
     {
@@ -14,6 +20,11 @@ namespace GameJam
         private InputController inputC;
         private long currentAttackClicks;
         private float animDeltaTime;
+        public bool OnAttack;
+        private bool lastAnimFinished = true;
+        private ATTACKANIMTYPE currentAttackType;
+        private bool thereIsNextAttack;
+        
         private void Start()
         {
             animator = GetComponent<Animator>();
@@ -41,49 +52,100 @@ namespace GameJam
                 SetJumpVelocity(movementManager.InputVel);
             }
 
-            SetAttackStates();
+           SetAttackAnims();
+            
             
         }
         //TODO..
-        void SetAttackStates()
+        void SetAttackAnims()
         {
-            var firstAttack = animator.GetBool("isAttacking");
-            var secondAttack = animator.GetBool("isSecondAttacking");
-            if (inputC.Attack)
+            
+            if (OnAttack && inputC.Attack && currentAttackClicks ==0)
             {
+                thereIsNextAttack = true;
                 currentAttackClicks++;
-                
+           
             }
-
-            if (firstAttack || secondAttack)
+            SetAttackStates();
+            if (OnAttack && !lastAnimFinished)
             {
                 animDeltaTime += Time.deltaTime;
             }
 
-            if (currentAttackClicks % 2 == 1 && inputC.Attack && animDeltaTime <0.97)
+            if (OnAttack && currentAttackType == ATTACKANIMTYPE.FIRST)
             {
-                animator.SetBool("isAttacking",true);
+                animator.SetBool("isAttacking",true );
                 animator.SetBool("isSecondAttacking",false);
-                
             }
-            if (currentAttackClicks % 2 ==0 && inputC.Attack && animDeltaTime > 0.97)
+
+            if (OnAttack && currentAttackType == ATTACKANIMTYPE.SECOND)
             {
-                animator.SetBool("isAttacking",false);
+                animator.SetBool("isAttacking",false );
                 animator.SetBool("isSecondAttacking",true);
             }
 
-            
+            if (currentAttackType==ATTACKANIMTYPE.FIRST && animDeltaTime>0.974615f )
+            {
+                lastAnimFinished = true;
+                animDeltaTime = 0f;
+                currentAttackClicks = 0;
 
-            if (animDeltaTime>2.367f)
+            }
+
+            if (currentAttackType == ATTACKANIMTYPE.SECOND && animDeltaTime > 1.397623f )
+            {
+                lastAnimFinished = true;
+                animDeltaTime = 0f;
+                currentAttackClicks = 0;
+     
+            }
+          
+
+            if (thereIsNextAttack && lastAnimFinished )
+            {
+                currentAttackType = currentAttackType == ATTACKANIMTYPE.FIRST
+                    ? ATTACKANIMTYPE.SECOND
+                    : ATTACKANIMTYPE.FIRST;
+                lastAnimFinished = false;
+                thereIsNextAttack = false;
+    
+
+            }
+
+            if (thereIsNextAttack && !lastAnimFinished)
+            {
+           
+            }
+      
+      
+         
+
+          
+            
+        }
+
+        void SetAttackStates()
+        {
+            if (!OnAttack&&inputC.Attack && lastAnimFinished)
+            {
+                OnAttack = true;
+                currentAttackType = ATTACKANIMTYPE.FIRST;
+                lastAnimFinished = false;
+      
+                animator.SetBool("isAttacking",currentAttackType == ATTACKANIMTYPE.FIRST);
+
+            }
+            else if (lastAnimFinished && !thereIsNextAttack)
             {
                 animator.SetBool("isAttacking",false);
                 animator.SetBool("isSecondAttacking",false);
-                animDeltaTime = 0f;
+                currentAttackType = ATTACKANIMTYPE.FIRST;
+                OnAttack = false;
             }
-
-           
             
         }
+
+   
     
         void SetWalkSpeed(float inputVel)
         {

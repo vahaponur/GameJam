@@ -38,10 +38,15 @@ namespace GameJam
 
         public float AttackSens => attackSens;
 
-        public bool ONAttack => onAttack;
+
 
         #endregion
-        
+
+        private void Start()
+        {
+             Cursor.lockState = CursorLockMode.Locked;
+        }
+
         private void Update()
         {
             SetInputAxes();
@@ -64,10 +69,7 @@ namespace GameJam
 
         }
 
-        void SetAttack()
-        {
-            
-        }
+    
         
     }
 }

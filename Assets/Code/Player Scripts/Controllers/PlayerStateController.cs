@@ -8,11 +8,13 @@ namespace GameJam
     {
         private MovementManager _movementManager;
         private InputController inputController;
+        private AnimValueController _animValueController;
 
         private void Start()
         {
             _movementManager = GetComponent<MovementManager>();
             inputController = GetComponent<InputController>();
+            _animValueController = GetComponent<AnimValueController>();
         }
 
         private void Update()
@@ -27,7 +29,7 @@ namespace GameJam
 
             #endregion
 
-            if (inputController.ONAttack)
+            if (_animValueController.OnAttack)
                 PlayerDataSingleton.Instance.PlayerState = PLAYERSTATE.ATTACK;
             
             else if (isJumpInput>0 && !grounded)
