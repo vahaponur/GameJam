@@ -64,7 +64,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amplitude: 1
+    - _Amplitude: 0.14
     - _BumpScale: 1
     - _Cull: 0
     - _Cutoff: 0.5
@@ -89,3 +89,4 @@ Material:
     - _Color: {r: 6.4222345, g: 0.6724853, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlowDirection: {r: 1, g: 0, b: 1, a: 0}
+  m_BuildTextureStacks: []

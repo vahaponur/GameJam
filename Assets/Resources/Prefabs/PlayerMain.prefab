@@ -2134,6 +2134,7 @@ GameObject:
   - component: {fileID: 1427227582}
   - component: {fileID: 1427227585}
   - component: {fileID: 6852253494495860219}
+  - component: {fileID: 1605353935}
   m_Layer: 3
   m_Name: PlayerMain
   m_TagString: Player
@@ -2201,7 +2202,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 3758742349738377758}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.2541324
   m_Height: 1.3081545
   m_Direction: 1
@@ -2277,6 +2278,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2037769e14494a23bd0decb753698f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &1605353935
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3758742349738377758}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.06, y: 0.705, z: 0.06}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.68, z: -0.03}
+  m_TimeToStationary: 0.5
 --- !u!1 &3803327640444438367
 GameObject:
   m_ObjectHideFlags: 0
@@ -3559,7 +3576,7 @@ GameObject:
   - component: {fileID: 579581536}
   m_Layer: 8
   m_Name: Line015
-  m_TagString: Untagged
+  m_TagString: PlayerSword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerCollider
+  - FxTemporaire
+  - PlayerSword
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -15,7 +18,7 @@ TagManager:
   - Environment
   - Step
   - Sword
-  - 
+  - Enemy
   - 
   - 
   - 
