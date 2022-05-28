@@ -15,7 +15,7 @@ namespace GameJam
         private InputController inputController;
         private CharacterController _controller;
         
-        private LayerMask mask;
+        [SerializeField] LayerMask mask;
         private Vector3 playerVelocity;
         
         private float gravityValue = Physics.gravity.magnitude;
@@ -31,12 +31,15 @@ namespace GameJam
         {
             _controller = GetComponent<CharacterController>();
             inputController = GetComponent<InputController>();
+            
         }
 
         private void Start()
         {
           
-            mask =~ LayerMask.GetMask("Player");
+         
+            cam = Camera.main;
+            
         }
 
         private void Update()
@@ -73,8 +76,10 @@ namespace GameJam
             
             if (inputController.Jump && playerIsGrounded)
                 playerVelocity.y += Mathf.Sqrt(jumpHeight* gravityValue);
-           
-            playerVelocity.y += -gravityValue*1.5f * Time.deltaTime;
+          
+            playerVelocity.y += -gravityValue * Time.deltaTime;
+
+            
             _controller.Move(playerVelocity * Time.deltaTime);
 
         }

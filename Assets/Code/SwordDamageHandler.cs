@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameJam;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SwordDamageHandler : MonoBehaviour
 {
@@ -40,6 +42,20 @@ public class SwordDamageHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-	    Debug.Log("sf");
+	    if (other.CompareTag("Enemy") && PlayerDataSingleton.Instance.PlayerState == PLAYERSTATE.ATTACK)
+	    {
+		    var handler =other.GetComponent<EnemyHealthHandler>();
+		    if (handler)
+		    {
+			    handler.GetDamage(GetRandomDamage());
+		
+		    }
+	    }
+    }
+
+    float GetRandomDamage()
+    {
+	    return Random.Range(8, 20f);
+	    
     }
 }

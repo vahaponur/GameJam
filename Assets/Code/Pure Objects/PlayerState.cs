@@ -10,7 +10,7 @@
         RUN,
         TURN,
         JUMP,
-        DODGE,
+        HITTED,
         ATTACK,
         
         

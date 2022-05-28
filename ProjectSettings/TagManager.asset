@@ -8,6 +8,8 @@ TagManager:
   - FxTemporaire
   - PlayerSword
   - Enemy
+  - EnemySword
+  - Nier
   layers:
   - Default
   - TransparentFX
@@ -19,9 +21,9 @@ TagManager:
   - Step
   - Sword
   - Enemy
-  - 
-  - 
-  - 
+  - PP
+  - CamDonusDuvar
+  - Nier
   - 
   - 
   - 
