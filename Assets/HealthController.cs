@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(InputController),typeof(Animator))]
 public class HealthController : MonoBehaviour
 {
-    private float health = 100f;
+    public float health = 100f;
     private Animator _animator;
     private bool dead = false;
     bool hitHandled = false;
@@ -40,7 +40,7 @@ public class HealthController : MonoBehaviour
                 sw = swo._mover;
                 if (sw.EnemyState == ENEMYSTATE.ATTACK && !hitHandled &&  PlayerDataSingleton.Instance.PlayerState != PLAYERSTATE.ATTACK )
                 {
-                    health -= Random.Range(1, 7f);
+                    health -= Random.Range(2, 10f);
                     _animator.SetTrigger("HitTrigger");
 
                     hitHandled = true;

@@ -4874,8 +4874,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6867a2ff8e460284cbee54c9c0ad8415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseRange: 4.83
-  attackRange: 1
+  chaseRange: 6.5
+  attackRange: 1.2
   EnemyState: 0
   _particleSystem: {fileID: 6322264707371450266}
 --- !u!195 &9082871645284643732
@@ -4887,7 +4887,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 9082871645284643731}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.17
+  m_Radius: 0.2
   m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
@@ -4942,6 +4942,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd89fb561b97cdd4cbec570afa022578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 100
+  isBoss: 0
 --- !u!114 &1010264182595312993
 MonoBehaviour:
   m_ObjectHideFlags: 0

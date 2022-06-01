@@ -13,7 +13,7 @@ public class RoomController : MonoBehaviour
    [SerializeField] private Light[] _lights;
    [SerializeField] private Color startColor;
    private float totalCanInRoom;
-   private float lerpRate = 0;
+
    private List<EnemyHealthHandler> _enemyHealthHandlers;
    private float currentCanInRoom;
    [SerializeField] private Color finishColor;

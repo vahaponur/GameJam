@@ -58,6 +58,7 @@ public class EnemyMover : MonoBehaviour
    
     void Update()
     {
+        _navMeshAgent.updatePosition = false;
         DecideState();
         if (EnemyState ==ENEMYSTATE.IDLE)
         {
@@ -67,6 +68,7 @@ public class EnemyMover : MonoBehaviour
         HandleChase();
         if (EnemyState == ENEMYSTATE.ATTACK)
         {
+            _navMeshAgent.updatePosition = false;
             transform.LookAt(player);
             _animator.SetBool("isAttacking",true);
             if (!secondAttackTriggered)
@@ -95,7 +97,7 @@ public class EnemyMover : MonoBehaviour
         else groundDeltaPos = Vector2.zero;
 
         enemyVelocity =(Time.deltaTime > 1e-5f) ? groundDeltaPos / Time.deltaTime:Vector2.zero;
-        var shouldMove = enemyVelocity.magnitude > 0.01f && _navMeshAgent.remainingDistance > _navMeshAgent.radius;
+        var shouldMove = enemyVelocity.magnitude > 0.01f && _navMeshAgent.remainingDistance > _navMeshAgent.radius && EnemyState != ENEMYSTATE.ATTACK;
         if (shouldMove)
         {
             _animator.SetFloat("velX",enemyVelocity.x);
@@ -111,7 +113,6 @@ public class EnemyMover : MonoBehaviour
     }
     private void OnAnimatorMove()
     {
-        
         transform.position = _navMeshAgent.nextPosition;
     }
 
