@@ -43,7 +43,7 @@ public class HealthController : MonoBehaviour
                     health -= Random.Range(1, 7f);
                     _animator.SetTrigger("HitTrigger");
 
-
+                    hitHandled = true;
                     StartCoroutine(ReturnFromHit());
                    
                 }
@@ -61,7 +61,7 @@ public class HealthController : MonoBehaviour
     IEnumerator ReturnFromHit()
     {
      
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(1.2f);
         _animator.SetTrigger("HitReturnTrigger");
 
         hitHandled = false;

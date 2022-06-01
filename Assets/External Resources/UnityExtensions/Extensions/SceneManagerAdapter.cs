@@ -95,6 +95,13 @@ public static  class SceneManagerAdapter
         CoroutineRunner.StartCoroutine(SceneManagerAdapter.LoadSceneAsync(nextSceneIndex));
         
     }
+    public static void LoadSceneAsenkron(string name)
+    {
+      
+        
+        CoroutineRunner.StartCoroutine(SceneManagerAdapter.LoadSceneAsync(name));
+        
+    }
     
     /// <summary>
     /// Reloads the current scene after given time

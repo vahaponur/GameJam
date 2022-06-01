@@ -134,10 +134,10 @@ Material:
     - _UvAnimScrollY: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.2028302, b: 0.45817366, a: 0.95686275}
+    - _Color: {r: 0, g: 1, b: 0.8306451, a: 0.95686275}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MovementDirection: {r: 0, g: -1, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RimColor: {r: 0.49656394, g: 0.08962262, b: 1, a: 1}
-    - _ShadeColor: {r: 0, g: 1, b: 0.31493068, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadeColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

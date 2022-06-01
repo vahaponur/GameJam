@@ -6,11 +6,16 @@ using UnityEngine.AI;
 
 public class EnemyHealthHandler : MonoBehaviour
 {
-    private float Health = 100f;
+    public float Health = 100f;
     private Animator _animator;
     private EnemyMover MOVER;
+    [SerializeField] bool isBoss;
     private void Awake()
     {
+        if (isBoss)
+        {
+            Health = 150f;
+        }
         _animator =GetComponent<Animator>();
         MOVER = GetComponent<EnemyMover>();
     }
@@ -18,6 +23,15 @@ public class EnemyHealthHandler : MonoBehaviour
     public void GetDamage(float damage)
     {
         Health -= damage;
+        if (!isBoss)
+        {
+            Health = Mathf.Clamp(Health, 0, 100);
+        }
+        else
+        {
+            Health = Mathf.Clamp(Health, 0, 150);
+
+        }
 
     }
 

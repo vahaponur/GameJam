@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4759055996445969215}
   - component: {fileID: 2846147787353743382}
   - component: {fileID: 1782768493308940444}
+  - component: {fileID: 7433473620608234781}
   m_Layer: 0
   m_Name: bowl005
   m_TagString: Untagged
@@ -26,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683469436458642437}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -36.565582, y: -2.0105686, z: -2.5108237}
-  m_LocalScale: {x: 1.1548, y: 1.1548, z: 0.662681}
+  m_LocalScale: {x: 2.1980083, y: 2.1980078, z: 1.2613251}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -60,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3019923196161733862, guid: 35c0b3c7d4c79224d9954124efc92979, type: 3}
+  - {fileID: 18858803709778759, guid: 83b522b6f6744934e9dfa1d03e70dc42, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,3 +96,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.80603933, y: 0.79379386, z: 0.42843732}
   m_Center: {x: 0, y: 0, z: 0.2503539}
+--- !u!65 &7433473620608234781
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683469436458642437}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.80603975, y: 0.79379416, z: 0.42843786}
+  m_Center: {x: 0.000000018652822, y: -0.000007651778, z: 0.25035402}

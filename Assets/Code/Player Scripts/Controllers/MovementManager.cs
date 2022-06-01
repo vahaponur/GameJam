@@ -99,7 +99,7 @@ namespace GameJam
         {
 
             Collider[] colsArr = new Collider[1];
-            var cols =Physics.OverlapSphereNonAlloc(groundChecker.transform.position, 0.15f,colsArr,mask);
+            var cols =Physics.OverlapSphereNonAlloc(groundChecker.transform.position, 0.1f,colsArr,mask);
             return cols>0 ;
         }
         
